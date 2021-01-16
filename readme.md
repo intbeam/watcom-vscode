@@ -35,13 +35,15 @@ Primary this was made to suit my own needs; primarily writing code for 16-bit an
 
 # How to use
 
-In the PowerShell commandline type the following :
+In the PowerShell commandline, go to a project directory and type the following :
 
 ```powershell
 Invoke-WebRequest "https://github.com/intbeam/watcom-vscode/tarball/main" -OutFile "./watcom-vscode.tar" && tar.exe -xf "./watcom-vscode.tar" && Remove-Item "./watcom-vscode.tar"
 ```
 
 This should create a directory named `watcom-vscode` that you can rename to your own needs.
+
+You can also clone the repository and then manually remove the `.git` directory.
 
 ## Requirements
 

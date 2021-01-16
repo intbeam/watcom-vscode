@@ -2,6 +2,10 @@
 
 This project aims to keep a simple project folder for Watcom C/C++ so that programmers can focus more on their code in a more modern environment than the IDE provided in Watcom.
 
+# License
+
+[MIT](https://opensource.org/licenses/MIT)
+
 ## Introduction
 
 This project contains a number of files designed to simplify the workflow when working with C and C++ for Watcom.

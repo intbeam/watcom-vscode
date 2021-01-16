@@ -19,13 +19,22 @@ A define for `far` is added here as well to remove annoying vscode squiggles und
 
 - Currently only Windows
 - Only designed for simple projects
+- All C and C++ files in `src` will be built
 
-# Goals
+## Structure
+
+`src` : this is where you'll place your own source files  
+`obj` : object files output by the Watcom compilers  
+`bin` : output from the Watcom linker  
+`assets` : place graphics and any related assets in this directory  
+`build.ps1` : compiles and links all C/C++ files placed in src directory  
+
+## Goals
 
 The IDE for OpenWatcom is old and not very user friendly. This solution provides something that is supposed to work out-of-the-box for "typical" Watcom scenarios.
-Primary this was made to suit my own needs; primarily writing code for 16-bit and 32-bit DOS in a modern environment without having to deal with projects or things like that.
+This was made to suit my own needs; primarily writing code for 16-bit and 32-bit DOS in a modern environment without having to deal with Watcom IDE projects.
 
-# Future improvements
+## Future improvements
 
 - Cross-platform
 - Auto-detect Watcom installation
@@ -33,7 +42,7 @@ Primary this was made to suit my own needs; primarily writing code for 16-bit an
 - Platform targets and compiler optimization flags
 - Post-build actions
 
-# How to use
+## How to use
 
 In the PowerShell commandline, go to a project directory and type the following :
 

@@ -20,6 +20,29 @@ A define for `far` is added here as well to remove annoying vscode squiggles und
 - Currently only Windows
 - Only designed for simple projects
 
+# Goals
+
+The IDE for OpenWatcom is old and not very user friendly. This solution provides something that is supposed to work out-of-the-box for "typical" Watcom scenarios.
+Primary this was made to suit my own needs; primarily writing code for 16-bit and 32-bit DOS in a modern environment without having to deal with projects or things like that.
+
+# Future improvements
+
+- Cross-platform
+- Auto-detect Watcom installation
+- Command to run with DOSBox
+- Platform targets and compiler optimization flags
+- Post-build actions
+
+# How to use
+
+In the PowerShell commandline type the following :
+
+```powershell
+Invoke-WebRequest "https://github.com/intbeam/watcom-vscode/tarball/main" -OutFile "./watcom-vscode.tar" && tar.exe -xf "./watcom-vscode.tar" && Remove-Item "./watcom-vscode.tar"
+```
+
+This should create a directory named `watcom-vscode` that you can rename to your own needs.
+
 ## Requirements
 
 - [PowerShell Core](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell)

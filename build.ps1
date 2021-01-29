@@ -51,6 +51,11 @@ if(-not (Test-Path "./obj"))
     New-Item "./obj" -ItemType Directory
 }
 
-# Compile and link. Output files to obj directory and put the binary in bin
-wcl.exe $fileString /fo="obj/" /bc /fe="bin/main.exe"
+# define wcl arguments here
+[string[]]$wclArguments = ("/fo=""./obj/""", "/bc", "/fe=""./bin/main.exe""")
 
+# append files to compile to arguments
+$wclArguments += $files
+
+# Compile and link. Output files to obj directory and put the binary in bin
+& 'wcl.exe' $wclArguments

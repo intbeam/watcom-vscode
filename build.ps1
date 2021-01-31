@@ -30,7 +30,7 @@ if($PSVersionTable.Platform -eq "Unix")
 $files = (Get-ChildItem -Path "./src" -Filter "*.c*" -Recurse | Where-Object { $_.Extension.ToLowerInvariant() -in (".c", ".cpp")} | Select-Object -ExpandProperty FullName | ForEach-Object { """{0}""" -f $_ }  )
 
 # Check environment variables. If Environment contains watcom install path we will assume it has been set correctly
-if($env:Path.contains($watcomInstallPath) -ne $true)
+if($env:PATH.contains($watcomInstallPath) -ne $true)
 {
     # Deconstruct environment path
     $existingPath = $env:PATH -split ";"

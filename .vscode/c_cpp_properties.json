@@ -20,7 +20,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/src/**",
-                "/opt/watcom/h"
+                "/usr/bin/watcom/lh"
             ],
             "defines": [
                 "_DEBUG",

@@ -35,7 +35,7 @@ $files = (Get-ChildItem -Path "./src" -Filter "*.c*" -Recurse | Where-Object { $
 if($env:Path.contains($watcomInstallPath) -ne $true)
 {
     # Deconstruct environment path
-    $existingPath = $env:Path -split ";"
+    $existingPath = $env:PATH -split ";"
 
 
     if($operatingSystem -eq "Windows")
@@ -48,8 +48,15 @@ if($env:Path.contains($watcomInstallPath) -ne $true)
         $existingPath += ("$watcomInstallPath/binl")
     }
 
+    [string]$pathSeparator = ";"
+
+    if($operatingSystem -ne "Windows")
+    {
+        $pathSeparator = ":"
+    }
+
     # Set new PATH environment variables
-    $env:PATH = ($existingPath | Join-String -Separator ";")
+    $env:PATH = ($existingPath | Join-String -Separator $pathSeparator)
 
     # Set relevant environment variables
     $env:WATCOM = $watcomInstallPath
@@ -61,7 +68,7 @@ if($env:Path.contains($watcomInstallPath) -ne $true)
     }
     else
     {
-        $env:INCLUDE = "$watcomInstallPath/lh"
+        $env:INCLUDE = "$watcomInstallPath/h"
     }
 }
 
@@ -77,10 +84,10 @@ if(-not (Test-Path "./obj"))
 }
 
 # define wcl arguments here
-[string[]]$wclArguments = ("/fo=""./obj/""", "/bc", "/fe=""./bin/main.exe""")
+[string[]]$wclArguments = ("-fo=""./obj/""", "-bc", "-bt=DOS", "-fe=""./bin/main.exe""")
 
 # append files to compile to arguments
 $wclArguments += $files
 
 # Compile and link. Output files to obj directory and put the binary in bin
-& "$watcomBinaryPath/wcl" $wclArguments
+& "wcl" $wclArguments

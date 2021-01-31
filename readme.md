@@ -36,7 +36,6 @@ This was made to suit my own needs; primarily writing code for 16-bit and 32-bit
 
 ## Future improvements
 
-- Cross-platform
 - Auto-detect Watcom installation
 - Command to run with DOSBox
 - Platform targets and compiler optimization flags
@@ -54,9 +53,30 @@ This should create a directory named `watcom-vscode` that you can rename to your
 
 You can also clone the repository and then manually remove the `.git` directory.
 
+## On Linux
+
+Open a terminal and install the required prerequisite tools:
+
+```sh
+sudo snap install powershell --classic
+sudo snap install code --classic
+wget https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/open-watcom-2_0-c-linux-x64
+sudo chmod +x ./open-watcom-2_0-c-linux-x64
+sudo ./open-watcom-2_0-c-linux-x64
+```
+
+Follow the install instructions for Open Watcom, install in default location (which should be `/usr/bin/watcom`) and remember to select 16-bit compilers.
+
+Finally,
+
+```sh
+wget -c https://github.com/intbeam/watcom-vscode/tarball/main -O ./watcom-vscode.tar && tar -xf ./watcom-vscode.tar && rm ./watcom-vscode.tar
+```
+
 ## Requirements
 
 - [PowerShell Core](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell)
 - [Visual Studio Code](https://code.visualstudio.com/Download)
 - [Open Watcom](http://www.openwatcom.org/download.php)
+- [Open Watcom 2.0](https://github.com/open-watcom/open-watcom-v2/releases) (for 64 bit Linux)
 - [DOSBox](https://www.dosbox.com/download.php?main=1) or other platform emulator capable of DOS PC/*T and 8088 / x86 emulation

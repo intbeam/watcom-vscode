@@ -15,12 +15,19 @@ param(
     [parameter(Mandatory = $false)][switch]$release = $false
 )
 
+[string]$operatingSystem = "Windows"
 # Watcom install path - assume root
 [string]$watcomInstallPath = "C:\WATCOM"
 
+# if platform is Unix change install path
+if($PSVersionTable.Platform -eq "Unix")
+{
+    $operatingSystem = "Unix-like"
+    $watcomInstallPath = "/opt/watcom"
+}
+
 # Retrieve all source code files (c, cpp) from src directory
 $files = (Get-ChildItem -Path "./src" -Filter "*.c*" -Recurse | Where-Object { $_.Extension.ToLowerInvariant() -in (".c", ".cpp")} | Select-Object -ExpandProperty FullName | ForEach-Object { """{0}""" -f $_ }  )
-[string]$fileString = $files | Join-String -Separator " "
 
 # Check environment variables. If Environment contains watcom install path we will assume it has been set correctly
 if($env:Path.contains($watcomInstallPath) -ne $true)
@@ -28,16 +35,32 @@ if($env:Path.contains($watcomInstallPath) -ne $true)
     # Deconstruct environment path
     $existingPath = $env:Path -split ";"
 
-    # Add watcom paths
-    $existingPath = $existingPath + ("$watcomInstallPath\binnt64", "$watcomInstallPath\binnt")
+
+    if($operatingSystem -eq "Windows")
+    {
+        # Add watcom paths
+        $existingPath += ("$watcomInstallPath\binnt64", "$watcomInstallPath\binnt")
+    }
+    else
+    {
+        $existingPath += ("$watcomInstallPath\binl")
+    }
 
     # Set new PATH environment variables
     $env:Path = ($existingPath | Join-String -Separator ";")
 
     # Set relevant environment variables
     $env:WATCOM = $watcomInstallPath
-    $env:EDPATH = "$watcomInstallPath\EDDAT"
-    $env:INCLUDE = "$watcomInstallPath\H;$watcomInstallPath\H\NT"
+    $env:EDPATH = "$watcomInstallPath\eddat"
+    
+    if($operatingSystem -eq "Windows")
+    {
+        $env:INCLUDE = "$watcomInstallPath\h;$watcomInstallPath\h\nt"
+    }
+    else
+    {
+        $env:INCLUDE = "$watcomInstallPath\lh"
+    }
 }
 
 # Create bin and obj directories if they don't exist
@@ -58,4 +81,4 @@ if(-not (Test-Path "./obj"))
 $wclArguments += $files
 
 # Compile and link. Output files to obj directory and put the binary in bin
-& 'wcl.exe' $wclArguments
+& 'wcl' $wclArguments

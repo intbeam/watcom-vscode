@@ -18,14 +18,12 @@ param(
 [string]$operatingSystem = "Windows"
 # Watcom install path - assume root
 [string]$watcomInstallPath = "C:/WATCOM"
-[string]$watcomBinaryPath = "$watcomInstallPath/binnt"
 
 # if platform is Unix change install path
 if($PSVersionTable.Platform -eq "Unix")
 {
     $operatingSystem = "Unix-like"
-    $watcomInstallPath = "/usr/bin/watcom"
-    $watcomBinaryPath = "$watcomInstallPath/binl"
+    $watcomInstallPath = "/usr/bin/watcom"    
 }
 
 # Retrieve all source code files (c, cpp) from src directory

@@ -20,7 +20,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
 			{
 				"label": "Build",
 				"type": "shell",
-				"command": "pwsh.exe ./build.ps1",
+				"command": "pwsh ./build.ps1",
 				"problemMatcher": [],
 				"group": {
 					"kind": "build",

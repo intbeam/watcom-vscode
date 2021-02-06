@@ -37,7 +37,6 @@ This was made to suit my own needs; primarily writing code for 16-bit and 32-bit
 ## Future improvements
 
 - Auto-detect Watcom installation
-- Command to run with DOSBox
 - Platform targets and compiler optimization flags
 - Post-build actions
 

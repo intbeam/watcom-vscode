@@ -1,0 +1,46 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type" : "shell",
+            "command": "pwsh.exe",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "args": [ 
+                "-File", "./build.ps1",                 
+                "-Architecture", "16bit"
+            ],
+            "isBackground": false,"presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [
+                {
+                    "source": "Watcom C/C++ Compiler and Linker",
+                    "pattern" : {
+                        /* "regexp" : "^([a-zA-Z0-9\\.\\\\/\\:]+)\\(([0-9]+)\\): (Error|Warning)! E([0-9]+): col\\(([0-9]+)\\) (.*)$",*/
+                           "regexp" : "^([a-zA-Z0-9:\\\\\\-\\.\\/_]+)\\(([0-9]+)\\): (Error|Warning)! (E[0-9]+): col\\(([0-9]+)\\) (.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "severity": 3,
+                        "message" : 6,
+                        "column": 5							
+                    },
+                    "owner": "cpp",
+                    "background": { "activeOnStart": true },
+                    "fileLocation" : "absolute",
+                    "applyTo": "allDocuments"
+                }
+            ],				
+            
+        }
+    
+    ]
+}

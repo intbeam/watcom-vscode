@@ -1,0 +1,14 @@
+{ 
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch DosBox",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "../run.ps1",
+            "cwd": "${workspaceFolder}/bin", 
+            "preLaunchTask": "Build"
+        }
+    ],
+    
+}

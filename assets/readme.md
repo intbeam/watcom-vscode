@@ -1,0 +1,1 @@
+You may place any relevant assets in this directory

@@ -1,37 +1,42 @@
 {
     "configurations": [
+
         {
-            "name": "Win32",
+            "name": "DOS16",
             "includePath": [
                 "${workspaceFolder}/src/**",
-                "C:/WATCOM/H/**"             
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE",
-                "far="
-            ],
-            "cStandard": "c89",
-            "cppStandard": "c++98",
-            "intelliSenseMode": "msvc-x86"
-        },
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/src/**",
+                "c:/watcom/h/**",
                 "/usr/bin/watcom/h/**"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
+                "_M_I86",
                 "far="
+            ],            
+            "cStandard": "c89",
+            "cppStandard": "c++98",
+            "intelliSenseMode": "msvc-x86"
+        },
+        {
+            "name": "DOS32",
+            "includePath": [
+                "${workspaceFolder}/src/**",
+                "c:/watcom/h/**",
+                "/usr/bin/watcom/h/**"
+            ],            
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"                
             ],
             "cStandard": "c89",
             "cppStandard": "c++98",
-            "intelliSenseMode": "msvc-x86"           
+            "intelliSenseMode": "msvc-x86"
         }
     ],
-    "version": 4
+    "env": {},
+    "version": 4,
+    "enableConfigurationSquiggles": false
 }

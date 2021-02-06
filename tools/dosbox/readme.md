@@ -1,0 +1,1 @@
+Put DosBox binaries in this directory to enable running the application from vscode

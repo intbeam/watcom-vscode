@@ -1,3 +1,8 @@
 bin
 obj
 *.err
+tools/*
+!tools/dosbox
+tools/*/*
+!tools/dosbox/readme.md
+

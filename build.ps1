@@ -12,7 +12,8 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 param(
-    [parameter(Mandatory = $false)][switch]$release = $false
+    [parameter(Mandatory = $false)][switch]$release = $false,
+    [parameter(Mandatory = $false)][string]$architecture = "16bit"    
 )
 
 [string]$operatingSystem = "Windows"
@@ -20,9 +21,8 @@ param(
 [string]$watcomInstallPath = "C:/WATCOM"
 
 # if platform is Unix change install path
-if($PSVersionTable.Platform -eq "Unix")
-{
-    $operatingSystem = "Unix-like"
+if($IsLinux)
+{    
     $watcomInstallPath = "/usr/bin/watcom"    
 }
 
@@ -36,7 +36,7 @@ if($env:PATH.contains($watcomInstallPath) -ne $true)
     $existingPath = $env:PATH -split ";"
 
 
-    if($operatingSystem -eq "Windows")
+    if($IsWindows)
     {
         # Add watcom paths
         $existingPath += ("$watcomInstallPath/binnt64", "$watcomInstallPath/binnt")
@@ -87,5 +87,18 @@ if(-not (Test-Path "./obj"))
 # append files to compile to arguments
 $wclArguments += $files
 
+# if($release -eq $false)
+# {
+     #$wclArguments += "-d2"
+# }
+
+[string]$command = "wcl"
+
 # Compile and link. Output files to obj directory and put the binary in bin
-& "wcl" $wclArguments
+Write-Host $architecture
+if($architecture -eq "32bit")
+{
+    $command = "wcl386"
+}
+
+& $command $wclArguments

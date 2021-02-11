@@ -17,9 +17,8 @@ A define for `far` is added here as well to remove annoying vscode squiggles und
 
 ## Caveats
 
-- Currently only Windows
 - Only designed for simple projects
-- All C and C++ files in `src` will be built
+- All C and C++ files in `src` will be built by default
 
 ## Structure
 

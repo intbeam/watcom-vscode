@@ -27,7 +27,7 @@ if($IsLinux)
 }
 
 # Retrieve all source code files (c, cpp) from src directory
-$files = (Get-ChildItem -Path "./src" -Filter "*.c*" -Recurse | Where-Object { $_.Extension.ToLowerInvariant() -in (".c", ".cpp")} | Select-Object -ExpandProperty FullName | ForEach-Object { """{0}""" -f $_ }  )
+$files = (Get-ChildItem -Path "./src" -Filter "*" -Recurse | Where-Object { $_.Extension.ToLowerInvariant() -in (".c", ".cpp", ".asm")} | Select-Object -ExpandProperty FullName | ForEach-Object { """{0}""" -f $_ }  )
 
 # Check environment variables. If Environment contains watcom install path we will assume it has been set correctly
 if($env:PATH.contains($watcomInstallPath) -ne $true)

@@ -4,7 +4,7 @@
         {
             "label": "Build",
             "type" : "shell",
-            "command": "pwsh.exe",
+            "command": "pwsh",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -24,8 +24,7 @@
             "problemMatcher": [
                 {
                     "source": "Watcom C/C++ Compiler and Linker",
-                    "pattern" : {
-                        /* "regexp" : "^([a-zA-Z0-9\\.\\\\/\\:]+)\\(([0-9]+)\\): (Error|Warning)! E([0-9]+): col\\(([0-9]+)\\) (.*)$",*/
+                    "pattern" : {                        
                            "regexp" : "^([a-zA-Z0-9:\\\\\\-\\.\\/_]+)\\(([0-9]+)\\): (Error|Warning)! (E[0-9]+): col\\(([0-9]+)\\) (.*)$",
                         "file": 1,
                         "line": 2,

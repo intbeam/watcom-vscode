@@ -6,6 +6,20 @@ This project aims to keep a simple project folder for Watcom C/C++ so that progr
 
 [MIT](https://opensource.org/licenses/MIT)
 
+## Quick update
+
+Hi, I know this project is kind of borked.
+There seems to be changes in how C LSP's tend to interpret things, which makes using this template kind of unbearable.
+I haven't bothered to fix it, because new errors keeps popping up.
+
+I'll have a look into it.
+
+Things I want to do :
+
+- [ ] Use some `make` system, instead of PowerShell
+- [ ] Figure out if there's a C Language Server that actually works with Watcom C/C++ code, without requiring recompilation
+- [ ] Improve intuitiveness further
+
 ## Introduction
 
 This project contains a number of files designed to simplify the workflow when working with C and C++ for Watcom.

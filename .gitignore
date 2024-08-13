@@ -5,4 +5,5 @@ tools/*
 !tools/dosbox
 tools/*/*
 !tools/dosbox/readme.md
+!tools/x86box/readme.md
 

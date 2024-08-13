@@ -8,17 +8,11 @@ This project aims to keep a simple project folder for Watcom C/C++ so that progr
 
 ## Quick update
 
-Hi, I know this project is kind of borked.
-There seems to be changes in how C LSP's tend to interpret things, which makes using this template kind of unbearable.
-I haven't bothered to fix it, because new errors keeps popping up.
-
-I'll have a look into it.
-
 Things I want to do :
 
-- [ ] Use some `make` system, instead of PowerShell
 - [ ] Figure out if there's a C Language Server that actually works with Watcom C/C++ code, without requiring recompilation
 - [ ] Improve intuitiveness further
+- [ ] Debugging through emulator (DOSBox/X86Box)
 
 ## Introduction
 
@@ -44,16 +38,19 @@ A define for `far` is added here as well to remove annoying vscode squiggles und
 
 ## Goals
 
-The IDE for OpenWatcom is old and not very user friendly. This solution provides something that is supposed to work out-of-the-box for "typical" Watcom scenarios.
-This was made to suit my own needs; primarily writing code for 16-bit and 32-bit DOS in a modern environment without having to deal with Watcom IDE projects.
+The original IDE for OpenWatcom is old and not very user friendly. 
+
+My solution provides something that is supposed to work out-of-the-box for "typical" Watcom scenarios.
+This repo was made to suit my own needs; primarily writing code for 16-bit and 32-bit DOS in a modern environment without having to deal with Watcom IDE projects
 
 ## Future improvements
 
-- Auto-detect Watcom installation
 - Platform targets and compiler optimization flags
 - Post-build actions
 
 ## How to use
+
+First, install OpenWatcom 2.0. Then make sure the appropriate PATH, INCLUDE and EDATA environment variables are set for your environment
 
 In the PowerShell commandline, go to a project directory and type the following :
 
@@ -85,10 +82,27 @@ Finally,
 wget -c https://github.com/intbeam/watcom-vscode/tarball/main -O ./watcom-vscode.tar && tar -xf ./watcom-vscode.tar && rm ./watcom-vscode.tar
 ```
 
+And delete or replace the readme.
+
 ## Requirements
 
 - [PowerShell Core](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell)
 - [Visual Studio Code](https://code.visualstudio.com/Download)
-- [Open Watcom](http://www.openwatcom.org/download.php)
-- [Open Watcom 2.0](https://github.com/open-watcom/open-watcom-v2/releases) (for 64 bit Linux)
-- [DOSBox](https://www.dosbox.com/download.php?main=1) or other platform emulator capable of DOS PC/*T and 8088 / x86 emulation
+- [Open Watcom 2.0](https://github.com/open-watcom/open-watcom-v2/releases)
+
+## Optional
+
+- [DOSBox](https://www.dosbox.com/download.php?main=1)
+- [X86Box](https://github.com/86Box/86Box/releases)
+
+
+## Thanks
+
+A thanks and apology to @eltoneo for not fixing your issues, I'll try to be more vigilant going forwards
+
+Thanks to the guys over at the Open Watcom Discord for tips
+
+ - Count_MHM
+ - Jiri Malak
+
+

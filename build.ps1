@@ -1,4 +1,4 @@
-# Copyright 2021 intbeam
+# Copyright 2021-2024 intbeam
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
 # to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
@@ -13,21 +13,33 @@
 
 param(
     [parameter(Mandatory = $false)][switch]$release = $false,
-    [parameter(Mandatory = $false)][string]$architecture = "16bit"    
+    [parameter(Mandatory = $true)][string]$configuration
 )
 
-[string]$operatingSystem = "Windows"
-# Watcom install path - assume root
-[string]$watcomInstallPath = "C:/WATCOM"
+$cppConfig = ConvertFrom-Json -InputObject (Get-Content -Raw -Path "./.vscode/c_cpp_properties.json")
 
-# if platform is Unix change install path
-if($IsLinux)
-{    
-    $watcomInstallPath = "/usr/bin/watcom"    
+
+$configurations = ($cppConfig.configurations)
+
+$currentConfig = $configurations | Where-Object { $_.name -eq $configuration}[0]
+
+
+$watcomInstallPath = $env:WATCOM
+
+if(!$watcomInstallPath)
+{
+    if($IsWindows)
+    {
+        $watcomInstallPath = "C:/WATCOM"
+    }
+    else
+    {
+        $watcomInstallPath = "/usr/bin/watcom"
+    }
 }
 
 # Retrieve all source code files (c, cpp) from src directory
-$files = (Get-ChildItem -Path "./src" -Filter "*" -Recurse | Where-Object { $_.Extension.ToLowerInvariant() -in (".c", ".cpp", ".asm")} | Select-Object -ExpandProperty FullName | ForEach-Object { """{0}""" -f $_ }  )
+$files = (Get-ChildItem -Path "./src" -Filter "*" -Recurse | Where-Object { $_.Extension.ToLowerInvariant() -in (".c", ".cpp")} | Select-Object -ExpandProperty FullName | ForEach-Object { "{0}" -f $_ }  )
 
 # Check environment variables. If Environment contains watcom install path we will assume it has been set correctly
 if($env:PATH.contains($watcomInstallPath) -ne $true)
@@ -48,7 +60,7 @@ if($env:PATH.contains($watcomInstallPath) -ne $true)
 
     [string]$pathSeparator = ";"
 
-    if($operatingSystem -ne "Windows")
+    if($IsWindows -ne "Windows")
     {
         $pathSeparator = ":"
     }
@@ -60,7 +72,7 @@ if($env:PATH.contains($watcomInstallPath) -ne $true)
     $env:WATCOM = $watcomInstallPath
     $env:EDPATH = "$watcomInstallPath/eddat"
     
-    if($operatingSystem -eq "Windows")
+    if($IsWindows)
     {
         $env:INCLUDE = "$watcomInstallPath/h;$watcomInstallPath/h/nt"
     }
@@ -68,7 +80,15 @@ if($env:PATH.contains($watcomInstallPath) -ne $true)
     {
         $env:INCLUDE = "$watcomInstallPath/h"
     }
+    
 }
+
+if(!$env:INCLUDE)
+{
+    $env:INCLUDE = "$watcomInstallPath/h;$watcomInstallPath/h/nt"
+}
+
+write-host "include $env:INCLUDE"
 
 # Create bin and obj directories if they don't exist
 if(-not (Test-Path "./bin"))
@@ -82,23 +102,13 @@ if(-not (Test-Path "./obj"))
 }
 
 # define wcl arguments here
-[string[]]$wclArguments = ("-fo=""./obj/""", "-bc", "-bt=DOS", "-fe=""./bin/main.exe""")
+[string[]]$wclArguments = $currentConfig.compilerArgs
 
 # append files to compile to arguments
 $wclArguments += $files
 
-# if($release -eq $false)
-# {
-     #$wclArguments += "-d2"
-# }
 
-[string]$command = "wcl"
+[string]$command = $currentConfig.compilerPath
 
-# Compile and link. Output files to obj directory and put the binary in bin
-Write-Host $architecture
-if($architecture -eq "32bit")
-{
-    $command = "wcl386"
-}
 
 & $command $wclArguments

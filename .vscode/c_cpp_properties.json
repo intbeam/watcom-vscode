@@ -1,42 +1,96 @@
 {
     "configurations": [
-
         {
             "name": "DOS16",
             "includePath": [
-                "${workspaceFolder}/src/**",
-                "c:/watcom/h/**",
-                "/usr/bin/watcom/h/**"
+                "${defaultIncludes}"
             ],
             "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE",
-                "_M_I86",
-                "far="
-            ],            
+                "${defaultDefines}",
+                "__I86__"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false,
+                "databaseFilename": "${default}",
+                "path": [
+                    "${defaultIncludes}"
+                ]
+            },
+            "compilerPath": "wcl",
             "cStandard": "c89",
             "cppStandard": "c++98",
-            "intelliSenseMode": "msvc-x86"
+            "intelliSenseMode": "msvc-x86",
+            "configurationProvider": "ms-vscode.makefile-tools",
+            "compilerArgs": [
+                "-fo=./obj/",
+                "-bc",
+                "-bt=DOS",
+                "-fe=./bin/main.exe"
+            ]
         },
         {
             "name": "DOS32",
             "includePath": [
-                "${workspaceFolder}/src/**",
-                "c:/watcom/h/**",
-                "/usr/bin/watcom/h/**"
-            ],            
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"                
+                "${defaultIncludes}"
             ],
+            "defines": [
+                "${defaultDefines}",
+                "__386__"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false,
+                "databaseFilename": "${default}",
+                "path": [
+                    "${defaultIncludes}"
+                ]
+            },
+            "compilerArgs": [
+                "-fo=./obj/",
+                "-bc",
+                "-bt=DOS",
+                "-fe=./bin/main.exe",
+                "-l=DOS4G"
+            ],
+            "compilerPath": "wcl386",
             "cStandard": "c89",
             "cppStandard": "c++98",
-            "intelliSenseMode": "msvc-x86"
+            "intelliSenseMode": "windows-clang-x86",
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
-    "env": {},
+    "env": {
+        "defaultDefines": [
+            "__X86__",
+            "M_I86",
+            "_M_I86",
+            "_M_IX86=0",
+            "__DOS__",
+            "_DOS",
+            "MSDOS",
+            "__SMALL__=1",
+            "_M_I86SM=__SMALL__",
+            "M_I86SM=__SMALL__",
+            "__cplusplus=1",
+            "__WATCOMC__=1300",
+            "_INTEGRAL_MAX_BITS=32",
+            "_PUSHPOP_SUPPORTED=1",
+            "__near=",
+            "__watcall=",
+            "far=",
+            "interrupt=",
+            "_interrupt=",
+            "__interrupt=",
+            "_dos_getvect(x)=0",
+            "_chain_intr(x)=0",
+            "asm=__asm",
+            "__declspec(x)=",
+            "__cdecl="
+        ],
+        "defaultIncludes": [
+            "${WATCOM}/h",
+            "${workspaceFolder}/src"
+        ]
+    },
     "version": 4,
     "enableConfigurationSquiggles": false
 }

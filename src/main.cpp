@@ -1,4 +1,4 @@
-/* Copyright 2021 Intbeam
+/* Copyright 2021-2024 Intbeam
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
 to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
@@ -12,18 +12,13 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMA
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 */
-
 #include "main.hpp"
 
 // Application entrypoint
 int main(int argc, char** argv)
-{
-    printf("\n");
-    printf("Hello world!\n\n");
-    printf("Press any key to exit.");
-
-    getchar();
-
-    return 0;
-    
+{   
+    printf("Hello World!\n");
+    return 0;   
 }
+
+

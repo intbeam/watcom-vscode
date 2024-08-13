@@ -3,17 +3,15 @@
     "tasks": [
         {
             "label": "Build",
-            "type" : "shell",
-            "command": "pwsh",
+            "type": "shell",
+            "command" : "./build.ps1",
+            "args": ["-configuration", "${command:cpptools.activeConfigName}"],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "args": [ 
-                "-File", "./build.ps1",                 
-                "-Architecture", "16bit"
-            ],
-            "isBackground": false,"presentation": {
+            "isBackground": false,
+            "presentation": {
                 "echo": true,
                 "reveal": "always",
                 "focus": false,
@@ -25,20 +23,49 @@
                 {
                     "source": "Watcom C/C++ Compiler and Linker",
                     "pattern" : {                        
-                           "regexp" : "^([a-zA-Z0-9:\\\\\\-\\.\\/_]+)\\(([0-9]+)\\): (Error|Warning)! (E[0-9]+): col\\(([0-9]+)\\) (.*)$",
+                        "regexp" : "^([a-zA-Z0-9:\\\\\\-\\.\\/_\\s]+)\\(([0-9]+)\\): Error! (E[0-9]+): col\\(([0-9]+)\\) (.*)$",
                         "file": 1,
-                        "line": 2,
-                        "severity": 3,
-                        "message" : 6,
-                        "column": 5							
+                        "line": 2,                        
+                        "message" : 5,
+                        "column": 4,                        
                     },
                     "owner": "cpp",
                     "background": { "activeOnStart": true },
                     "fileLocation" : "absolute",
-                    "applyTo": "allDocuments"
+                    "applyTo": "allDocuments",
+                    "severity": "error"
+                },
+                {
+                    "source": "Watcom C/C++ Compiler and Linker",
+                    "pattern" : {                        
+                        "regexp" : "^([a-zA-Z0-9:\\\\\\-\\.\\/_\\s]+)\\(([0-9]+)\\): Warning! (W[0-9]+): col\\(([0-9]+)\\) (.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "message" : 5,
+                        "column": 4,                        
+                    },
+                    "owner": "cpp",
+                    "background": { "activeOnStart": true },
+                    "fileLocation" : "absolute",
+                    "applyTo": "allDocuments",
+                    "severity": "warning"
+                },
+                {
+                    "source": "Watcom C/C++ Compiler and Linker",
+                    "pattern" : {                        
+                        "regexp" : "^([a-zA-Z0-9:\\\\\\-\\.\\/_\\s]+)\\(([0-9]+)\\): Note! (N[0-9]+): col\\(([0-9]+)\\) (.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "message" : 5,
+                        "column": 4,                        
+                    },
+                    "owner": "cpp",
+                    "background": { "activeOnStart": true },
+                    "fileLocation" : "absolute",
+                    "applyTo": "allDocuments",
+                    "severity": "info"
                 }
-            ],				
-            
+            ]
         }
     
     ]
